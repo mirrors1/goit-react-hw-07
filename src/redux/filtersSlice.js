@@ -1,7 +1,7 @@
 //Імпортуємо функцію createAction
 import { createSlice } from '@reduxjs/toolkit';
 
-const slice = createSlice({
+const filtersSlice = createSlice({
   // Ім'я слайсу
   name: 'filters',
   // Початковий стан редюсера слайсу
@@ -22,8 +22,10 @@ const slice = createSlice({
   },
 });
 
-// Експортуємо фабрики екшенів
-export const { changeFilter, setStatusFilter } = slice.actions;
+export default filtersSlice.reducer;
 
-// Експортуємо редюсер слайсу
-export default slice.reducer;
+// Експортуємо фабрики екшенів
+export const { changeFilter, setStatusFilter } = filtersSlice.actions;
+
+export const selectStatusFilter = state => state.filters.status;
+export const selectNameFilter = state => state.filters.name;

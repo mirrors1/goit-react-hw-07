@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //Імпортуємо фабрику екшену
 import { changeFilter } from '../../redux/filtersSlice';
+import { selectContacts } from '../../redux/contactsSlice';
 
 // const SearchBox = { value, onSearch, placeholderText };
 const SearchBox = () => {
@@ -15,7 +16,7 @@ const SearchBox = () => {
   //Індекс масиву значень для placeholder - підсказка для користувача
   const [currentIndex, setCurrentIndex] = useState(0);
   //Отримуємо масив контактів із стану Redux
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectContacts);
   //Масив значень для placeholder - підсказка для користувача
   const [placeholderData, setPlaceholderData] = useState(() =>
     contacts.map(item => item.name.toLowerCase().trim())

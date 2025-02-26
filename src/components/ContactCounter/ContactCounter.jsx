@@ -1,9 +1,10 @@
+import { selectContacts } from '../../redux/contactsSlice';
 import s from './ContactCounter.module.css';
 import { useSelector } from 'react-redux';
 
 export const ContactCounter = () => {
   // Отримуємо масив завдань із стану Redux
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectContacts);
 
   // На базі стану Redux отримуємо похідні дані
   const count = contacts.reduce(

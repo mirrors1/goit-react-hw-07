@@ -3,12 +3,12 @@ import css from './StatusFilter.module.css';
 //Імпортуємо хук
 import { useSelector, useDispatch } from 'react-redux';
 //Імпортуємо фабрику екшену
-import { setStatusFilter } from '../../redux/filtersSlice';
+import { selectStatusFilter, setStatusFilter } from '../../redux/filtersSlice';
 
 export const StatusFilter = () => {
   // Отримуємо посилання на функцію відправки екшенів
   const dispatch = useDispatch();
-  const filterStatus = useSelector(state => state.filters.status);
+  const filterStatus = useSelector(selectStatusFilter);
 
   //Викликаємо фабрику екшену та передаємо значення фільтра
   //Відправляємо результат - екшен зміни фільтра

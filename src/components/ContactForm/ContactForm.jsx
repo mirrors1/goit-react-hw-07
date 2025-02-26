@@ -5,9 +5,9 @@ import { nanoid } from 'nanoid';
 //Імпортуємо хук
 import { useDispatch } from 'react-redux';
 //Імпортуємо фабрику екшену
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsOps';
 
-const AddContactForm = () => {
+const ContactForm = () => {
   //Отримуємо посилання на функцію відправки екшенів
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ const AddContactForm = () => {
   };
 
   const handleSubmit = (values, action) => {
-    values.id = nanoid();
+    // values.id = nanoid();
     dispatch(addContact(values));
     action.resetForm();
   };
@@ -95,4 +95,4 @@ const AddContactForm = () => {
     </section>
   );
 };
-export default AddContactForm;
+export default ContactForm;
