@@ -12,6 +12,9 @@ import Layout from './Layout/Layout';
 import SearchBox from './SearchBox/SearchBox';
 import { selectError, selectLoading } from '../redux/contactsSlice';
 import { toast } from 'react-hot-toast';
+import Loader from './Loader/Loader';
+
+import ScrollTop from './ScrollTop/ScrollTop';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,20 +43,14 @@ function App() {
       toast.error(error);
     }
   }, [error]);
-  useEffect(() => {
-    toast.loading('Loading tasks...');
-  }, [loading]);
   return (
     <Layout>
       <Header />
       <AppBar />
       <ContactForm />
       <SearchBox />
-      {loading && <p>Loading tasks...</p>}
-      {/* {error && <p>{error}</p>} */}
-
-      {loading && !error && <b>Request in progress...</b>}
-      <ContactList />
+      {loading ? <Loader /> : <ContactList />}
+      <ScrollTop />
     </Layout>
   );
 }

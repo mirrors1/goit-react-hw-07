@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  gap: 24px 24px;
+  gap: 12px 12px;
 }
 .item {
   display: flex;
@@ -15,5 +15,17 @@
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.02);
   box-shadow: 2px 2px 4px 4px lightgrey;
-  flex-basis: calc((100% - 24px * 2) / 3);
+  flex-basis: calc((100% - 12px * 2) / 3);
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+.item:hover,
+.item:focus {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  box-sizing: content-box;
+  fill: #337ab7;
+  transition: fill 300ms ease-in-out, color 300ms ease-in-out;
 }
