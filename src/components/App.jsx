@@ -10,28 +10,50 @@ import Header from './Header/Header';
 import Layout from './Layout/Layout';
 
 import SearchBox from './SearchBox/SearchBox';
+import { selectError, selectLoading } from '../redux/contactsSlice';
+import { toast } from 'react-hot-toast';
 
 function App() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // Отримуємо частини стану
-  // const { items, loading, error } = useSelector(state => state.contacts);
-
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   // Викликаємо операцію
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  useEffect(() => {
+    //Встановлюємо abortController для відміни запиту на сервер
+    const abortController = new AbortController();
+    dispatch(fetchContacts(abortController.signal));
 
+    //Налаштовуємо таймер для відміни запиту на сервер
+    setTimeout(() => {
+      abortController.abort();
+    }, 6000); //якщо 6 секунд сервер не відповідає - відмінити запит
+
+    //Якщо користувач перейшов на іншу сторінку... - відміняємо запит на сервер
+    return () => {
+      abortController.abort();
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+  useEffect(() => {
+    toast.loading('Loading tasks...');
+  }, [loading]);
   return (
     <Layout>
       <Header />
       <AppBar />
       <ContactForm />
       <SearchBox />
-      <ContactList />
-      {/* {loading && <p>Loading tasks...</p>}
-      {error && <p>{error}</p>}
+      {loading && <p>Loading tasks...</p>}
+      {/* {error && <p>{error}</p>} */}
+
       {loading && !error && <b>Request in progress...</b>}
-      <p>{items.length > 0 && JSON.stringify(items, null, 2)}</p> */}
+      <ContactList />
     </Layout>
   );
 }

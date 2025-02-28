@@ -1,7 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import s from './ContactForm.module.css';
 import * as Yup from 'yup';
-import { nanoid } from 'nanoid';
 //Імпортуємо хук
 import { useDispatch } from 'react-redux';
 //Імпортуємо фабрику екшену
@@ -43,7 +42,6 @@ const ContactForm = () => {
   };
 
   const handleSubmit = (values, action) => {
-    // values.id = nanoid();
     dispatch(addContact(values));
     action.resetForm();
   };
@@ -64,8 +62,6 @@ const ContactForm = () => {
             </label>
             <label className={s.label}>
               Number
-              {/* <Field className={s.field} type="tel" name="number" />
-               */}
               <Field name="number">
                 {({ field }) => (
                   <input

@@ -8,6 +8,8 @@ import App from './components/App.jsx';
 import { Provider } from 'react-redux';
 //Імпортуємо створений раніше стор
 import { store } from './redux/store';
+import { Toaster } from 'react-hot-toast';
+
 // import { persistor, store } from './redux/store';
 //Імпортуємо PersistGate для роботи с локальним сховищем
 // import { PersistGate } from 'redux-persist/integration/react';
@@ -19,5 +21,6 @@ createRoot(document.getElementById('root')).render(
       <App />
       {/* </PersistGate> */}
     </Provider>
+    <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
   </StrictMode>
 );

@@ -11,15 +11,19 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
   // Використовуємо символ підкреслення як ім'я першого параметра,
   // тому що в цій операції він нам не потрібен
-  async (_, thunkAPI) => {
+  async (signal, thunkAPI) => {
     try {
-      const response = await axios.get('/contacts');
+      const response = await axios.get('/contacts', { signal: signal });
       // При успішному запиті повертаємо проміс із даними
       return response.data;
     } catch (error) {
-      // При помилці запиту повертаємо проміс
-      // який буде відхилений з текстом помилки
-      return thunkAPI.rejectWithValue(error.message);
+      if (axios.isCancel(error)) {
+        // При відміні запиту на сервер повертаємо помилку
+        return thunkAPI.rejectWithValue('Server request cancelled');
+      } else {
+        // При помилці запиту повертаємо проміс який буде відхилений з текстом помилки
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
